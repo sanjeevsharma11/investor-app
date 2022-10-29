@@ -71,25 +71,16 @@ const HomeScreen = () => {
   }, [limit]);
 
   return (
-    <StyledComponent component={SafeAreaView} className="bg-[#E6E9F3]">
+    <StyledComponent component={SafeAreaView} className="bg-[#E6E9F3] pb-20">
       <HomeHeader />
       <StyledComponent
         component={ScrollView}
         showsVerticalScrollIndicator={false}
-        className="px-4 flex-1"
+        className="pb-12 px-2"
       >
         <FeedCard feed={feed} />
-        <FeedCard feed={feed} />
-        <FeedCard feed={feed} />
-        <FeedCard feed={feed} />
-        <FeedCard feed={feed} />
-        <FeedCard feed={feed} />
-        <FeedCard feed={feed} />
-        <FeedCard feed={feed} />
-        <FeedCard feed={feed} />
-        <FeedCard feed={feed} />
-        <FeedCard feed={feed} />
       </StyledComponent>
+
       {/* <StyledComponent
         component={FlatList}
         className="flex-1 h-full"
