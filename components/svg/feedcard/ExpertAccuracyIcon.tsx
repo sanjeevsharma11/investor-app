@@ -10,6 +10,8 @@ const ExpertAccuracyIcon = () => {
   return (
     <SvgCss
       xml={xml}
+      height="8"
+      width="8"
     />
   );
 }

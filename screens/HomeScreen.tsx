@@ -1,5 +1,5 @@
-import { StyledComponent } from "nativewind";
-import React, { useCallback, useEffect, useState } from "react";
+import { StyledComponent } from 'nativewind';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -7,59 +7,59 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ScrollView,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import FeedCard from "../components/Cards/FeedCard/FeedCard";
-import HomeHeader from "../components/Header/HomeHeader";
-import useFetchFeeds from "../hooks/useFetchFeeds";
-import { API_URL } from "../store/constants";
-import { IFeed } from "../store/types/feed.types";
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import FeedCard from '../components/Cards/FeedCard/FeedCard';
+import HomeHeader from '../components/Header/HomeHeader';
+import useFetchFeeds from '../hooks/useFetchFeeds';
+import { API_URL } from '../store/constants';
+import { IFeed } from '../store/types/feed.types';
 
 const feed = {
-  _id: "635b86ccb3712aca18e82803",
+  _id: '635b86ccb3712aca18e82803',
   expert: {
-    _id: "61debfbc85a3f110e85585fc",
+    _id: '61debfbc85a3f110e85585fc',
     avatar:
-      "https://prod-iwt-bucket.s3.ap-south-1.amazonaws.com/image-1650348918736840fd4ed-12d7-4d7f-87db-70dbac654b9a.jpg",
-    name: "RideMultibagger",
+      'https://prod-iwt-bucket.s3.ap-south-1.amazonaws.com/image-1650348918736840fd4ed-12d7-4d7f-87db-70dbac654b9a.jpg',
+    name: 'RideMultibagger',
     rating: 5,
     isCertified: false,
     return: 31,
     hitRatio: 0.46,
-    username: "ridemultibagger",
+    username: 'ridemultibagger',
   },
-  transactionType: "BUY",
-  instrumentName: "Premium Trade",
+  transactionType: 'BUY',
+  instrumentName: 'JINDALSTEL24NOV22470CE',
   instrumentReturn: 0.54,
-  reason: "banknifty setup",
+  reason: 'banknifty setup',
   minInvest: 6707.5,
   upsideInPercent: 101,
   upsideInPrice: 6758,
-  triggerLevel: "market",
-  triggerPriceLow: 0,
-  triggerPriceHigh: 0,
+  triggerLevel: 'range',
+  triggerPriceLow: 154,
+  triggerPriceHigh: 454789,
   LTP: 134.15,
-  bullishOrBearish: "Bullish",
-  exitDate: new Date("2022-11-24T10:15:00.000Z"),
+  bullishOrBearish: 'Bullish',
+  exitDate: new Date('2022-11-24T10:15:00.000Z'),
   reactions: [
     {
       count: 1,
-      reaction: "👍",
+      reaction: '👍',
     },
   ],
   reactionCount: 1,
   shareCount: 0,
-  createdAt: new Date("2022-10-28T07:37:48.138Z"),
+  createdAt: new Date('2022-10-28T07:37:48.138Z'),
   premiumTradePrice: 1999,
-  tradingViewStockName: "BANKNIFTY",
-  hashtags: "#invest, #stockmarketindia, #OptionsWithRMB, #Options",
+  tradingViewStockName: 'BANKNIFTY',
+  hashtags: '#invest, #stockmarketindia, #OptionsWithRMB, #Options',
   isPremium: true,
-  premiumTradeType: "PAID",
+  premiumTradeType: 'FREE',
 };
 
 const HomeScreen = () => {
   const [skip, setSkip] = useState(0);
-  const [limit, setlimit] = useState(1);
+  const [limit, setlimit] = useState(5);
 
   const { feeds, loading, error, hasMore } = useFetchFeeds({
     skip,
@@ -70,22 +70,43 @@ const HomeScreen = () => {
     setSkip((prevPage) => prevPage + limit);
   }, [limit]);
 
+  useEffect(() => {
+    if (hasMore) {
+      const subscriber = setInterval(() => {
+        handleLoadMore();
+      }, 1000);
+
+      return () => {
+        clearInterval(subscriber);
+      };
+    }
+  }, [hasMore]);
+
   return (
-    <StyledComponent component={SafeAreaView} className="bg-[#E6E9F3] pb-20">
+    <StyledComponent
+      component={SafeAreaView}
+      className='bg-[#E6E9F3] pb-20'
+    >
       <HomeHeader />
-      <StyledComponent
-        component={ScrollView}
-        showsVerticalScrollIndicator={false}
-        className="pb-12 px-2"
-      >
-        <FeedCard feed={feed} />
-      </StyledComponent>
 
       {/* <StyledComponent
+        component={View}
+        className='flex-1 bg-[#E6E9F3] px-4'
+      >
+        <FeedCard feed={feed} />
+      </StyledComponent> */}
+
+      <StyledComponent
         component={FlatList}
-        className="flex-1 h-full"
+        className='flex-1 h-full px-2'
         data={feeds}
-        renderItem={({ item }) => <FeedCard feed={item as IFeed} />}
+        initialNumToRender={limit}
+        renderItem={useCallback(
+          ({ item }: { item: any }) => (
+            <FeedCard feed={item as IFeed} />
+          ),
+          []
+        )}
         keyExtractor={(item) => (item as IFeed)._id}
         showsVerticalScrollIndicator={false}
         onEndReached={handleLoadMore}
@@ -96,11 +117,11 @@ const HomeScreen = () => {
           ) : error ? (
             <StyledComponent
               component={View}
-              className="flex-row justify-center items-center"
+              className='flex-row justify-center items-center'
             >
               <StyledComponent
                 component={Text}
-                className="text-lg font-bold text-red-500"
+                className='text-lg font-bold text-red-500'
               >
                 {error}
               </StyledComponent>
@@ -108,36 +129,18 @@ const HomeScreen = () => {
           ) : !hasMore ? (
             <StyledComponent
               component={View}
-              className="flex-row justify-center items-center"
+              className='flex-row justify-center items-center'
             >
               <StyledComponent
                 component={Text}
-                className="text-lg font-bold text-gray-500"
+                className='text-lg font-bold text-gray-500'
               >
                 No more feeds
               </StyledComponent>
             </StyledComponent>
-          ) : (
-            <StyledComponent
-              component={TouchableOpacity}
-              className="flex-row justify-center items-center  rounded-md"
-            >
-              <StyledComponent
-                component={View}
-                className="bg-blue-500 font-semibold  px-4 py-2 rounded-md"
-              >
-                <StyledComponent
-                  component={Text}
-                  className="text-base font-bold text-white"
-                  onPress={handleLoadMore}
-                >
-                  Load more
-                </StyledComponent>
-              </StyledComponent>
-            </StyledComponent>
-          )
+          ) : null
         }
-      /> */}
+      />
     </StyledComponent>
   );
 };

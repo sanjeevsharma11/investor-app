@@ -4,15 +4,6 @@ import { StyledComponent } from 'nativewind';
 import { IFeed } from '../../../store/types/feed.types';
 import StartIcon from '../../svg/feedcard/StartIcon';
 
-interface IInstrumentInfoWrapper {
-  instrumentName: IFeed['instrumentName'];
-  transactionType: IFeed['transactionType'];
-  LTP: IFeed['LTP'];
-  instrumentReturn: IFeed['instrumentReturn'];
-  premiumTradeType: IFeed['premiumTradeType'];
-  bullishOrBearish: IFeed['bullishOrBearish'];
-}
-
 const InstrumentInfoWrapper = ({
   instrumentName,
   transactionType,
@@ -20,11 +11,11 @@ const InstrumentInfoWrapper = ({
   instrumentReturn,
   premiumTradeType,
   bullishOrBearish,
-}: IInstrumentInfoWrapper) => {
+}: IFeed) => {
   return (
     <StyledComponent
       component={View}
-      className='flex-row items-center mt-2'
+      className='flex-row items-center mt-4'
     >
       <BuyOrSellIcon
         transactionType={transactionType}
@@ -106,7 +97,7 @@ const InstrumentName = ({
   return (
     <StyledComponent
       component={Text}
-      className='text-black font-medium ml-2 text-base'
+      className='text-black font-medium ml-2 text-sm'
     >
       {instrumentName}{' '}
       <StyledComponent
@@ -143,7 +134,7 @@ const SinceAdded = ({
   return (
     <StyledComponent
       component={View}
-      className='ml-2'
+      className='ml-1'
     >
       <StyledComponent
         component={Text}
