@@ -53,13 +53,13 @@ const BuyOrSellIcon = ({
       style={
         premiumTradeType === 'PAID'
           ? {
-              backgroundColor: 'rgba(255, 226, 183, 1)',
-            }
+            backgroundColor: 'rgba(255, 226, 183, 1)',
+          }
           : transactionType === 'BUY'
-          ? {
+            ? {
               backgroundColor: 'rgba(202, 255, 217, 1)',
             }
-          : {
+            : {
               backgroundColor: 'rgba(255, 72, 72, 0.15)',
             }
       }
@@ -119,17 +119,16 @@ const SinceAdded = ({
 }) => {
   const className = `
   text-gray-400 font-normal text-[10px]
-  ${
-    instrumentReturn > 0 && bullishOrBearish.toLowerCase() === 'bullish'
+  ${instrumentReturn > 0 && bullishOrBearish.toLowerCase() === 'bullish'
       ? 'text-[#0D9F36]'
       : instrumentReturn > 0 && bullishOrBearish.toLowerCase() !== 'bullish'
-      ? 'text-[#FF4848]'
-      : instrumentReturn < 0 && bullishOrBearish.toLowerCase() === 'bullish'
-      ? 'text-[#FF4848]'
-      : instrumentReturn < 0 && bullishOrBearish.toLowerCase() !== 'bullish'
-      ? 'text-[#0D9F36]'
-      : ''
-  }`;
+        ? 'text-[#FF4848]'
+        : instrumentReturn < 0 && bullishOrBearish.toLowerCase() === 'bullish'
+          ? 'text-[#FF4848]'
+          : instrumentReturn < 0 && bullishOrBearish.toLowerCase() !== 'bullish'
+            ? 'text-[#0D9F36]'
+            : ''
+    }`;
 
   return (
     <StyledComponent

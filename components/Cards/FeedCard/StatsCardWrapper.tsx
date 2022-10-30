@@ -2,9 +2,11 @@ import { View, Text } from 'react-native';
 import React from 'react';
 import { StyledComponent } from 'nativewind';
 import { IFeed } from '../../../store/types/feed.types';
-import getTriggerLevelWithValue from '../../../utils/getTriggerLevelWithValue';
 import numberWithCommas from '../../../utils/numberWithCommas';
-import getExitDate from '../../../utils/getExitDate';
+import {
+  getExitDate,
+  getTriggerLevelWithValue,
+} from '../../../logic/feed_logic';
 
 const StatsCardWrapper = ({
   minInvest,

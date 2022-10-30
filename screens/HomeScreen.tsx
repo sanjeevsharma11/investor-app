@@ -85,7 +85,7 @@ const HomeScreen = () => {
   return (
     <StyledComponent
       component={SafeAreaView}
-      className='bg-[#E6E9F3] pb-20'
+      className='bg-[#E6E9F3] pb-20 '
     >
       <HomeHeader />
 

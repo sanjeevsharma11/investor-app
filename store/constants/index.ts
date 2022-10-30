@@ -1,1 +1,1 @@
-export const API_URL = 'https://investor.investwithtribe.com';
+export const API_URL = process.env.REACT_APP_BACKEND_URL;
