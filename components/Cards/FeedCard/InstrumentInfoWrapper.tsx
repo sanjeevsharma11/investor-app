@@ -2,7 +2,7 @@ import { View, Text } from 'react-native';
 import React from 'react';
 import { StyledComponent } from 'nativewind';
 import { IFeed } from '../../../store/types/feed.types';
-import StartIcon from '../../svg/feedcard/StartIcon';
+import StartIcon from '../../../svg/feedcard/StartIcon';
 
 const InstrumentInfoWrapper = ({
   instrumentName,

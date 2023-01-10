@@ -1,8 +1,8 @@
 import { View, Text, Image } from 'react-native';
 import React from 'react';
 import { StyledComponent } from 'nativewind';
-import ExpertAccuracyIcon from '../../svg/feedcard/ExpertAccuracyIcon';
-import ExpertReturnIcon from '../../svg/feedcard/ExpertReturnIcon';
+import ExpertAccuracyIcon from '../../../svg/feedcard/ExpertAccuracyIcon';
+import ExpertReturnIcon from '../../../svg/feedcard/ExpertReturnIcon';
 import { IFeed } from '../../../store/types/feed.types';
 import numeral from 'numeral';
 
@@ -55,7 +55,7 @@ const ExpertInfoWrapper = ({ expert }: { expert: IFeed['expert'] }) => {
               component={Text}
               className='text-white text-[8px]'
             >
-              {numeral(expert.hitRatio * 100).format('0')}%
+              {numeral(expert.hitRatio).format('0')}%
             </StyledComponent>
           </StyledComponent>
         </StyledComponent>

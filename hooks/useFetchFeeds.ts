@@ -1,7 +1,7 @@
-import { useExpertContext } from "../context/ExpertContext";
-import { useEffect, useState } from "react";
-import api from "../store/api";
-import { IFeed } from "../store/types/feed.types";
+import { useExpertContext } from '../context/ExpertContext';
+import { useEffect, useState } from 'react';
+import api from '../store/api';
+import { IFeed } from '../store/types/feed.types';
 
 const useFetchFeeds = ({
   skip = 0,
@@ -24,8 +24,16 @@ const useFetchFeeds = ({
     const fecthFeeds = async () => {
       try {
         const { data } = await api.get(`/feeds`, {
-          params: { skip, limit, expertUserName: username },
+          params: {
+            skip,
+            limit,
+            expertUserName: username,
+            tradeType: 'all',
+            paymentType: 'all',
+            instrumentSymbol: '',
+          },
         });
+
 
         setFeeds((prevFeeds) => {
           if (prevFeeds) {
@@ -40,10 +48,10 @@ const useFetchFeeds = ({
             return data.data;
           }
         });
-        setLoading(false);
         setHasMore(data.data.length > 0);
       } catch (e) {
         setError(true);
+      } finally {
         setLoading(false);
       }
     };

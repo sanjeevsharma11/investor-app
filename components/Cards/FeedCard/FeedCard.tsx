@@ -1,38 +1,27 @@
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import React, { memo, useEffect } from 'react';
 import { IFeed } from '../../../store/types/feed.types';
 import { StyledComponent } from 'nativewind';
 import ExpertInfoWrapper from './ExpertInfoWrapper';
 import InstrumentInfoWrapper from './InstrumentInfoWrapper';
 import StatsCardWrapper from './StatsCardWrapper';
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useNavigation } from '@react-navigation/core';
-import { IRootStackParamList } from '../../../App';
-import * as Google from 'expo-auth-session/providers/google';
+import { IRootStackParamList } from 'App';
+
 
 const FeedCard = ({ feed }: { feed: IFeed }) => {
-  const { navigate } =
-    useNavigation<NativeStackNavigationProp<IRootStackParamList>>();
 
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    expoClientId:
-      '678052593552-ribm00sia1tho0t60ajc3a3gd2khjh81.apps.googleusercontent.com',
-    iosClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
-    androidClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
-    webClientId: 'GOOGLE_GUID.apps.googleusercontent.com',
-  });
+    const { navigate } =
+      useNavigation<NativeStackNavigationProp<IRootStackParamList>>();
 
-  const handleGoogleLogin = async () => {
-    try {
-      const result = await promptAsync();
-
-      if (result.type === 'success') {
-        navigate('FeedDetailScreen');
+    const handleViewMore = async () => {
+      try {
+        navigate('FeedDetailScreen', { id: feed._id });
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
-    }
-  };
+    };
 
   return (
     <StyledComponent
@@ -42,6 +31,19 @@ const FeedCard = ({ feed }: { feed: IFeed }) => {
       <ExpertInfoWrapper expert={feed.expert} />
       <InstrumentInfoWrapper {...feed} />
       <StatsCardWrapper {...feed} />
+
+      <StyledComponent
+        component={View}
+        className='bg-blue-600 px-4 py-2 my-2 rounded-full  items-center justify-center '
+      >
+        <StyledComponent
+          component={Text}
+          className='text-white text-center w-40'
+          onPress={handleViewMore}
+        >
+          View more
+        </StyledComponent>
+      </StyledComponent>
     </StyledComponent>
   );
 };
